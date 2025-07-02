@@ -1,0 +1,46 @@
+CREATE DATABASE IF NOT EXISTS orange_line_db;
+USE orange_line_db;
+
+-- Train Schedule Table
+CREATE TABLE IF NOT EXISTS train_schedule (
+    train_no INT PRIMARY KEY,
+    from_station VARCHAR(100),
+    to_station VARCHAR(100),
+    time VARCHAR(10)
+);
+INSERT INTO train_schedule (train_no, from_station, to_station, time) VALUES
+(101, 'Lahore', 'Karachi', '08:00'),
+(102, 'Islamabad', 'Multan', '14:00');
+
+-- Station Info Table
+CREATE TABLE IF NOT EXISTS station_info (
+    station_id INT AUTO_INCREMENT PRIMARY KEY,
+    station_name VARCHAR(100),
+    location VARCHAR(100)
+);
+INSERT INTO station_info (station_name, location) VALUES
+('Lahore Junction', 'Lahore'),
+('Karachi Central', 'Karachi');
+
+-- Ticket Booking Table
+CREATE TABLE IF NOT EXISTS ticket_booking (
+    ticket_id INT AUTO_INCREMENT PRIMARY KEY,
+    train_no INT,
+    passenger_name VARCHAR(100),
+    booking_date DATE,
+    FOREIGN KEY (train_no) REFERENCES train_schedule(train_no)
+);
+INSERT INTO ticket_booking (train_no, passenger_name, booking_date) VALUES
+(101, 'Ali Khan', '2025-06-29'),
+(102, 'Sara Ahmed', '2025-06-30');
+
+-- Passenger Table
+CREATE TABLE IF NOT EXISTS passenger (
+    passenger_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100)
+);
+INSERT INTO passenger (name) VALUES
+('Ali Khan'),
+('Sara Ahmed'),
+('Ahmed Khan');
+select * from  passenger;
